@@ -11,7 +11,7 @@
     <ul id="filmes-list"></ul>
 
     <script>
-        fetch("http://localhost:8080/filmes")
+        fetch("https://api-pzmz.onrender.com/filmes")
         .then(response => response.json())
         .then(data => {
             const filmesList = document.getElementById("filmes-list");
