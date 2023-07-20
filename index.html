@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Filmes</title>
+</head>
+<body>
+    <h1>Filmes:</h1>
+    <ul id="filmes-list"></ul>
+
+    <script>
+        fetch("http://localhost:8080/filmes")
+        .then(response => response.json())
+        .then(data => {
+            const filmesList = document.getElementById("filmes-list");
+            data.forEach(filme => {
+                const listItem = document.createElement("li");
+                const heading = document.createElement("h2");
+                const description = document.createElement("p");
+                const image = document.createElement("img");
+                const url = document.createElement("a");
+                heading.textContent = filme.name;
+                description.textContent = filme.description;
+                image.src = filme.image; // Set the image source from filme.image property
+                image.alt = filme.name; // Set alt text for the image
+                url.href = filme.url; // Set the URL from filme.url property
+                url.textContent = "Ver detalhes"; // Set link text
+                listItem.appendChild(heading);
+                listItem.appendChild(image);
+                listItem.appendChild(description);
+                listItem.appendChild(url); // Append the link to the list item
+                filmesList.appendChild(listItem);
+            });
+        })
+        .catch(error => {
+            console.error("Error fetching filmes:", error);
+        });
+    </script>
+</body>
+</html>
